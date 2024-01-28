@@ -312,24 +312,83 @@ nav {
   left: 0;
   top: -100%;
   transition: all ease 0.25s;
+  will-change: top;
+  transform: translateZ(0);
 }
 .elem:hover .overlay {
   top: 0;
 }
 .elem-container {
-  background-color: red;
 }
 .fixed-image {
   height: 30vw;
   width: 24vw;
   background-color: #fe320a;
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
   z-index: 9999999;
-  left: 50%;
-  top: 40%;
+  left: 80%;
+  top: 214vw;
   transform: translate(-50%, -50%);
   background-size: cover;
   background-position: center;
   display: none;
+}
+.panel {
+  height: 100vh;
+  width: 100%;
+  margin: 10vw 0;
+  background-color: black;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+}
+
+.left-panel {
+  position: relative;
+  padding: 10vw;
+  transition: all 0.5s ease;
+}
+.left-panel h1,
+p {
+  color: #504a45;
+  transition: all 0.5s ease;
+}
+.left-panel h1 {
+  font-size: 3vw;
+  padding-left: 1vw;
+}
+.left-panel p {
+  font-size: 1.2vw;
+  padding: 2vw 0;
+  color: #e8e3dc;
+}
+.left-panel h1.selected {
+  color: white;
+}
+
+.right-panel {
+  flex: 1;
+}
+.right-panel img {
+  border-radius: 18px;
+  height: 100%;
+  overflow: hidden;
+}
+.left-panel h1::before {
+  content: "";
+  position: absolute;
+  left: 10vw;
+  top: 15.5vw;
+  height: 9.5vw;
+  width: 3px;
+  background-color: #504a45;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease; /* Added transition for smooth color change */
+}
+
+.left-panel h1.selected,
+.left-panel h1.selected::before {
+  color: #fe330a; /* Set the color for the selected (active) heading */
+  /* Set the color for the selected (active) heading's bar */
 }

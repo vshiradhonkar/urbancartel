@@ -6,6 +6,7 @@ import HeroShape from '../components/HeroShape';
 import Banner from "../components/Banner.jsx";
 import BannerBottom from '../components/BannerBottom.jsx';
 import FeaturedProducts from '../components/FeaturedProducts.jsx';
+import Panel from '../components/Panel.jsx';
 
 
 
@@ -21,7 +22,7 @@ function Home() {
         <Banner/>
         <BannerBottom/>
         <FeaturedProducts/>
-        
+        <Panel/>
     </div>
     </>
   )
