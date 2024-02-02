@@ -46,7 +46,7 @@ function FeaturedProducts() {
         </div>
       </div>
       <div className='nav_right'>
-      <h4><a href='https://www.sundown-studio.com/work'>All Projects  →</a></h4>
+      <h4><a href='/'>All Projects  →</a></h4>
       </div>
     </>
   );
