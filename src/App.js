@@ -1,7 +1,10 @@
 import React, {useEffect, useRef} from "react";
+import { BrowserRouter , Routes , Route } from 'react-router-dom';
 import "./App.css";
 import Home from "./pages/Home";
+import SignIn from "./pages/SignIn"
 import LocomotiveScroll from 'locomotive-scroll';
+import Navbar from "./components/Navbar";
 
 
 function App() {
@@ -22,7 +25,14 @@ function App() {
   return (
     <><div className="fixed-image"></div>
     <div ref={scrollContainerRef} className="App">
-      <Home/>
+      <BrowserRouter>
+      <Navbar/>
+        <Routes>
+          <Route path="/" element={<Home />}  />
+          <Route path="/signin" element={<SignIn />}  />
+        </Routes>
+      </BrowserRouter>
+
     </div>
     </>
   );

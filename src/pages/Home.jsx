@@ -1,12 +1,12 @@
 import React from 'react';
 import "../App.css";
-import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import HeroShape from '../components/HeroShape';
 import Banner from "../components/Banner.jsx";
 import BannerBottom from '../components/BannerBottom.jsx';
 import FeaturedProducts from '../components/FeaturedProducts.jsx';
 import Panel from '../components/Panel.jsx';
+import Footer from '../components/Footer.jsx';
 
 
 
@@ -14,7 +14,6 @@ function Home() {
   return (
     <>
       <div className='HomePage'>
-        <Navbar/>
         
         <Hero/>
         <HeroShape/>
@@ -23,6 +22,7 @@ function Home() {
         <BannerBottom/>
         <FeaturedProducts/>
         <Panel/>
+        <Footer/>
     </div>
     </>
   )
