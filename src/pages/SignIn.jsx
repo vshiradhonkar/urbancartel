@@ -1,80 +1,153 @@
-import React, { useState } from 'react';
 import "../App.css";
-import { auth } from '../firebase.js';
-import { signInWithGoogle } from "../firebase.js";
+import React, { useEffect, useState } from "react";
+import { FaSignInAlt } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { auth } from "../firebase";
+import { useNavigate,Link} from 'react-router-dom';
+import {signInWithGoogle} from "../firebase";
 
 function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [isAlertOpen, setIsAlertOpen] = useState(false); // State for alert
+  const navigate = useNavigate();
 
-  const handleSignIn = async () => {
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      alert('User signed in successfully!');
-      // You can redirect the user or perform other actions upon successful login
+      console.log("Attempting sign-in...");
+      await auth.signInWithEmailAndPassword(formData.email, formData.password);
+      setFormData({
+        email: "",
+        password: "",
+      });
+
+      console.log("Sign-in successful");
+      
+      setIsAlertOpen(true); // Open the alert for successful sign-in
+      navigate('/');
     } catch (error) {
-      alert('Error signing in:', error.message);
+      console.error("Error signing in", error);
+
+      // Check the error code to display appropriate alerts
+      if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+        alert("Invalid email or password. Please try again.");
+      } else {
+        alert("Error signing in. Please try again later.");
+      }
     }
   };
 
+  const closeAlert = () => {
+    setIsAlertOpen(false);
+    navigate('/'); // Navigate to the '/' route
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      // The user argument will be non-null if a user is signed in
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
-      alert('User signed in with Google successfully!');
-      // You can redirect the user or perform other actions upon successful login
+      const result = await signInWithGoogle();
+       // Check if the sign-in was successful
+      if (result.success) {
+        // After successful Google Sign-In, redirect to the home page
+        navigate('/');
+        alert("Sign-in successful. Thank You!");
+      } else {
+        // If there's an issue with sign-in, show an alert
+        console.error("Error during Google Sign-In:", result.error);
+        alert("Error signing in with Google. Please try again.");
+      }
+  
     } catch (error) {
-      alert('Error signing in with Google:', error.message);
+      // If there's an error during Google Sign-In, show an alert
+      
+      console.error("Error during Google Sign-In:", error);
     }
   };
 
+
   return (
-    <div className='signin'>
-      <form action="" className="form_main">
-        <p className="heading">Login</p>
-        <div className="inputContainer">
-          <svg
-            className="inputIcon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="#2e2e2e"
-            viewBox="0 0 16 16"
-          >
-            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
-          </svg>
-          <input type="text" className="inputField" id="username" placeholder="Email" />
-        </div>
-
-        <div className="inputContainer">
-          <svg
-            className="inputIcon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="#2e2e2e"
-            viewBox="0 0 16 16"
-          >
-            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
-          </svg>
-          <input type="password" className="inputField" id="password" placeholder="Password" />
-        </div>
-        
-        <div className='button'>
-          <button id="signInButton" onClick={handleSignIn}>
-            <h4>Submit</h4>
+    <>
+      <div className="ui-panel">
+        <div className="background-image"></div>
+        <div className="login-form">
+          <h1 className="h1s">Sign In</h1>
+          <input
+            className="login-input"
+            name="email"
+            type="text"
+            placeholder="Enter your Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <br />
+          <input
+            className="login-input"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <button className="loginpasseye" onClick={togglePasswordVisibility} type="button">
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
           </button>
+          <br />
+          <div className="buttons">
+            <button type="submit" onClick={handleSignIn} className="Btn">
+              <div className="sign">
+                <FaSignInAlt className="icon fa-xl" style={{ color: "#ffffff" }} />
+              </div>
+              <div className="texts">Login</div>
+            </button>
+          </div>
+          <div className="signUpGoogle">
+            <Link to="#" className="signUpGoogle" onClick={handleGoogleSignIn}>
+              Sign in with Google <pre> </pre>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 488 512">
+              <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+              </svg>
+            </Link>
+          </div>
+          <br />
         </div>
-        <div className='button'>
-          <button id='googleSignInButton' onClick={handleGoogleSignIn}>
-            <h4>Sign In With Google</h4>
-          </button>
-        </div>
-
-        <a className='forgotLink' href='http://localhost:3000/signin'>
-          Forgot your password?
+        <a href="#/register" onClick={() => window.scrollTo(0, 0)} className="text1">
+          Don't have an account?
         </a>
-      </form>
-    </div>
+        <br />
+      </div>
+
+      {isAlertOpen && (
+        <div className="alert">
+          <h2>Greetings!</h2>
+          <p>You are signed in successfully. Thank you!</p>
+          <button className="alert-button" onClick={closeAlert}>
+            OK
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 

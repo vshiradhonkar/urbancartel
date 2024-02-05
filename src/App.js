@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn"
 import LocomotiveScroll from 'locomotive-scroll';
 import Navbar from "./components/Navbar";
+import Register from "./pages/Register";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}  />
           <Route path="/signin" element={<SignIn />}  />
+          <Route path="/register" element={<Register/>} />
         </Routes>
       </BrowserRouter>
 

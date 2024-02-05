@@ -24,6 +24,7 @@ function Home() {
         <Panel/>
         <Footer/>
     </div>
+    
     </>
   )
 }
