@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faPhone, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 // import HeroPages from "../components/HeroPages";
 import ScrollTop from "../components/ScrollTop";
 import {Link, useNavigate} from 'react-router-dom';
 // import {motion} from "framer-motion";
 import {auth, firestore , signInWithGoogle} from "../firebase";
 import "../App.css";
+import Footer from "../components/Footer";
 
 
 function Register() {
@@ -194,19 +195,9 @@ function Register() {
           </h3>
         </div>
       </section>
-      <div className="book-banner">
-        <div className="book-banner__overlay"></div>
-        <div className="container">
-          <div className="text-content">
-            <h2>Book a car by getting in touch with us</h2>
-            <span>
-              <FontAwesomeIcon icon={faPhone} />
-              <h3>(0) 123-456-6789</h3>
-            </span>
-          </div>
-        </div>
-      </div>
       <ScrollTop />
+      <Footer/>
+    
     {/* </motion.div> */}
     </div>
   );

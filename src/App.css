@@ -36,6 +36,30 @@ body {
   position: relative;
   padding: 0 2vw;
 }
+/* scroll top button */
+.scroll-up {
+  position: fixed;
+  font-size: 2.5rem;
+  color: white;
+  background-color: #ad21ff;
+  border: 3px solid white;
+  width: 2rem;
+  height: 2rem;
+  bottom: 5rem;
+  right: 5rem;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.show-scroll {
+  display: flex;
+}
+
 nav img {
   position: fixed;
   left: 1.5vw;
@@ -400,6 +424,7 @@ nav {
   display: none;
 }
 .panel {
+  cursor: default;
   height: 100vh;
   width: 100%;
   margin: 10vw 0;
@@ -505,7 +530,7 @@ footer {
 }
 
 .footer-content_1 li a:hover {
-  color: #ad21ff;
+  color: #ff9831;
 }
 
 .footer-content_1 li:nth-child(1) {
@@ -549,7 +574,7 @@ footer {
 }
 
 .footer-content_2 a:hover {
-  color: #ad21ff;
+  color: #ff9831;
 }
 
 .footer-content_2 li {
@@ -585,14 +610,13 @@ footer {
 
 .submit-email {
   text-decoration: none;
-  color: white;
+  color: black;
   font-weight: 700;
-  background-color: #ad21ff;
+  background-color: #ff9831;
   padding: 1rem 2rem;
   border-radius: 0.3rem;
-  box-shadow: 0 10px 15px 0 rgba(144, 24, 255, 0.5);
   transition: all 0.3s;
-  border: 2px solid #ad21ff;
+  border: 2px solid #ff9831;
   font-size: 1rem;
   width: -moz-fit-content;
   width: fit-content;
@@ -602,7 +626,6 @@ footer {
 
 .submit-email:hover {
   box-shadow: 0 10px 15px 0 rgba(255, 115, 0, 0.959);
-  background-color: #6200ff;
 }
 
 .signin {

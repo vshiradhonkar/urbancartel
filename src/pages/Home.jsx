@@ -23,6 +23,7 @@ function Home() {
         <FeaturedProducts/>
         <Panel/>
         <Footer/>
+        
     </div>
     
     </>

@@ -38,9 +38,9 @@ const Footer = () => {
         <div className="footer-content">
           <ul className="footer-content_1">
             <li>
-              <span>CAR</span> Rental
+              <span>URBAN</span> Cartel
             </li>
-            <li>We offer a wide range of vehicles for all your driving needs. We have the perfect car to meet your needs.
+            <li>We offer a wide range of recycled products for all your fashion needs. We have the perfect product to meet your needs.
             </li>
             <li>
               <a href="tel:0123456789">
@@ -51,7 +51,7 @@ const Footer = () => {
             <li>
               <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJTNqbwNXQMpXbQgKsfFPrCvbsdLxwCgmTQCWCqSGrwdNDWPLnvHKNcLfSlzCTncJfRnpwL">
                 <FontAwesomeIcon icon={faEnvelope} /> &nbsp;
-                carentalproject@gmail.com
+                urbancartelproject@gmail.com
               </a>
             </li>
 
@@ -70,7 +70,7 @@ const Footer = () => {
           <ul className="footer-content_2">
             <li>Company</li>
             <li>
-              <a href="https://www.google.com/maps?sca_esv=581540659&sxsrf=AM9HkKkr1WFLXzsN_ZFDWPYgaODa-PqvPw:1699719139900&uact=5&gs_lp=Egxnd3Mtd2l6LXNlcnAiDCBMb3MgQW5nZWxlczIKEC4YigUYsQMYQzIIEAAYigUYkQIyDRAuGIoFGLEDGIMBGEMyCBAAGIoFGJECMg4QLhiKBRixAxiDARiRAjIIEAAYigUYkQIyCBAAGIoFGJECMg0QLhiKBRixAxiDARhDMgoQABiKBRixAxhDMgoQABiKBRixAxhDMhkQLhiKBRixAxhDGJcFGNwEGN4EGOAE2AEBSIEGUABYAHAAeAGQAQCYAbIBoAGyAaoBAzAuMbgBA8gBAPgBAvgBAeIDBBgAIEGIBgG6BgYIARABGBQ&q=Los+Angeles&um=1&ie=UTF-8&sa=X&ved=2ahUKEwiM4K-iq7yCAxW2klYBHVKgAYsQ_AUoA3oECAIQBQ">Los Santos</a>
+              <a href="google.com">Los Santos</a>
             </li>
             <li>
               <Link to="/404">Careers</Link>

@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn"
 import LocomotiveScroll from 'locomotive-scroll';
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
+import Help from "./pages/Help";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<Home />}  />
           <Route path="/signin" element={<SignIn />}  />
           <Route path="/register" element={<Register/>} />
+          <Route path="/help" element={<Help/>} />
         </Routes>
       </BrowserRouter>
 
