@@ -1,14 +1,13 @@
-import React, {useEffect, useRef} from "react";
-import { BrowserRouter , Routes , Route } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import "./App.css";
 import Home from "./pages/Home";
-import SignIn from "./pages/SignIn"
+import SignIn from "./pages/SignIn";
 import LocomotiveScroll from 'locomotive-scroll';
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Help from "./pages/Help";
 import Shop from "./pages/Shop";
-
 
 function App() {
   const scrollContainerRef = useRef(null);
@@ -25,21 +24,22 @@ function App() {
       scroll.destroy();
     };
   }, []);
-  return (
-    <><div className="fixed-image"></div>
-    <div ref={scrollContainerRef} className="App">
-      <BrowserRouter>
-      <Navbar/>
-        <Routes>
-          <Route path="/" element={<Home />}  />
-          <Route path="/shop" element={<Shop />}  />
-          <Route path="/signin" element={<SignIn />}  />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/help" element={<Help/>} />
-        </Routes>
-      </BrowserRouter>
 
-    </div>
+  return (
+    <>
+      <div className="fixed-image"></div>
+      <div ref={scrollContainerRef} className="App">
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/help" element={<Help />} />
+          </Routes>
+        </Router>
+      </div>
     </>
   );
 }
