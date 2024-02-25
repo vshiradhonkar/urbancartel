@@ -58,6 +58,7 @@ function Navbar() {
         <h4><Link to='/'>Home</Link></h4>
         <h4><Link to='/shop'>Shop</Link></h4>
         <h4><Link to='/cart'>Cart</Link></h4>
+        <h4><Link to='/help'>Help</Link></h4>
       </div>
       <div className='nav_right'>
       {isUserSignedIn ? (

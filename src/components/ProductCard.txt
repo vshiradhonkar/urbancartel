@@ -1,0 +1,75 @@
+import React, { useState } from 'react';
+import "../App.css";
+import nikelogo from "../images/nike.png"
+import shoe1 from "../images/shoe1.png";
+import shoe2 from "../images/shoe2.png";
+function ProductPage() {
+  const [containerClass, setContainerClass] = useState('container');
+
+  const handleColorClick = (color) => {
+    if (color === 'color-1') {
+      setContainerClass('container');
+    } else if (color === 'color-2') {
+      setContainerClass('container change');
+    }
+  };
+
+  return (
+    <div className='productPage'>
+    <div className={containerClass}>
+      <div className="card-wrapper">
+        <div className="card">
+          <div className="card-top">
+            <img src={nikelogo} className="logo" alt="Nike Logo" />
+            <div className="card-top-text">
+              <h1>Air Structure</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
+                quasi ratione praesentium eum commodi modi neque dignissimos
+                eligendi illo officiis!
+              </p>
+            </div>
+            <img src={shoe1} className="shoe-1" alt="Shoe 1" />
+            <img src={shoe2} className="shoe-2" alt="Shoe 2" />
+          </div>
+          <div className="card-bottom">
+            <h1>Air Structure</h1>
+            <div className="badge">New</div>
+            <h3>Running Collections</h3>
+            <div className="stars">
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+            </div>
+            <div className="size">
+              <h4>Size</h4>
+              <div className="sizes">
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+                <span>11</span>
+              </div>
+            </div>
+            <div className="color">
+              <h4>Color</h4>
+              <div className="colors">
+                <div className="color-1" onClick={() => handleColorClick('color-1')}></div>
+                <div className="color-2" onClick={() => handleColorClick('color-2')}></div>
+              </div>
+            </div>
+            <div className="price">
+              <span>Usd</span>
+              <span>350,00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  );
+}
+
+export default ProductPage;

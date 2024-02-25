@@ -7,6 +7,7 @@ import LocomotiveScroll from 'locomotive-scroll';
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Help from "./pages/Help";
+import Shop from "./pages/Shop";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Navbar/>
         <Routes>
           <Route path="/" element={<Home />}  />
+          <Route path="/shop" element={<Shop />}  />
           <Route path="/signin" element={<SignIn />}  />
           <Route path="/register" element={<Register/>} />
           <Route path="/help" element={<Help/>} />
