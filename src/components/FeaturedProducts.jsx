@@ -45,7 +45,7 @@ function FeaturedProducts() {
           ))}
         </div>
       </div>
-      <div className='nav_right'>
+      <div className='product-button'>
       <h4><a href='/shop'>All Products  →</a></h4>
       </div>
     </>

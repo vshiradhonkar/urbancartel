@@ -63,8 +63,8 @@ body {
 nav img {
   position: fixed;
   left: 1.5vw;
-  top: 2.5vw;
-  height: 2vw;
+  top: 1.5vw;
+  height: 5vw;
   width: auto;
   margin: 0 2vw;
 }
@@ -377,6 +377,18 @@ nav {
   min-height: 100vh;
   width: 100%;
   padding: 4vw 0;
+}
+.product-button {
+  max-width: 11vw;
+  padding: 10px 20px;
+  border: 1px solid #00000083;
+  border-radius: 50px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.699);
+  font-size: 18px;
+}
+.product-button:hover {
+  box-shadow: 0 0 15px #ff2d03;
 }
 .elem {
   height: 120px;

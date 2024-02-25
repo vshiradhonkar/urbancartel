@@ -9,3 +9,6 @@
   margin-top: 20px;
   font-size: 20px;
 }
+.recommended-flex button:hover {
+  box-shadow: 0 0 10px #fe330a;
+}
