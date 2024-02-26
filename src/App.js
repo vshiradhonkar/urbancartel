@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Help from "./pages/Help";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
 
 function App() {
   const scrollContainerRef = useRef(null);
@@ -34,6 +35,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/register" element={<Register />} />
             <Route path="/help" element={<Help />} />

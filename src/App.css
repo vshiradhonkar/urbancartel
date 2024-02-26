@@ -1329,3 +1329,147 @@ li {
   background-color: #fff;
   padding-top: 2vw;
 }
+.popup {
+  position: fixed;
+  top: 12.5vw;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.616);
+  padding: 10px 20px;
+  border-radius: 50px;
+  z-index: 999;
+}
+
+/* Cart container */
+.cart-container {
+  width: 800px; /* Adjust width as needed */
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Cart container */
+.cart-container {
+  width: 800px; /* Adjust width as needed */
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Cart summary */
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cart-summary h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.cart-summary p {
+  margin: 0.5rem 0;
+}
+
+/* Seller info */
+.seller-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.seller-info h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Item container */
+.item-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.item-container img {
+  width: 100px; /* Adjust as needed */
+  height: auto;
+  margin-right: 1rem;
+}
+
+.item-details {
+  flex: 1; /* Allow item details to expand */
+}
+
+.item-details h4 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.item-details p {
+  margin: 0.3rem 0;
+}
+
+/* Gift options */
+.gift-options {
+  margin-bottom: 2rem;
+}
+
+.gift-options label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.gift-options input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.gift-options p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.gift-options input[type="text"] {
+  width: 100%; /* Adjust as needed */
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Order summary */
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.order-summary p {
+  margin: 0.5rem 0;
+}
+
+.order-summary .total {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.order-summary a {
+  padding: 0.5rem 1rem;
+  border: 1px solid #007bff;
+  border-radius: 3px;
+  color: #007bff;
+  text-decoration: none; /* Remove underline */
+}
+
+/* Links */
+.cart-summary a,
+.seller-info a,
+.gift-options a,
+.order-summary a {
+  color: inherit; /* Inherit color from parent element */
+}

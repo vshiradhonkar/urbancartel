@@ -12,7 +12,7 @@ function Shop() {
 
   // Input Filter
   const [query, setQuery] = useState("");
-
+// eslint-disable-next-line
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
