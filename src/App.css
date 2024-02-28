@@ -486,13 +486,12 @@ p {
   width: 3px;
   background-color: #504a45;
   transform: translateY(-50%);
-  transition: background-color 0.3s ease; /* Added transition for smooth color change */
+  transition: background-color 0.3s ease;
 }
 
 .left-panel h1.selected,
 .left-panel h1.selected::before {
-  color: #fe330a; /* Set the color for the selected (active) heading */
-  /* Set the color for the selected (active) heading's bar */
+  color: #fe330a;
 }
 
 /* footer styling */
@@ -1342,15 +1341,46 @@ li {
 }
 
 /* Cart container */
-.cart-container {
-  width: 800px; /* Adjust width as needed */
-  margin: 0 auto;
-  padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+.cart-loader {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 14vw;
+  font-size: 4.5vw;
 }
-
-/* Cart container */
+.signinplease {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 14vw;
+  font-size: 4.5vw;
+}
+.bg-grad-2 {
+  height: 33vw;
+  width: 33vw;
+  position: fixed;
+  border-radius: 50%;
+  background: linear-gradient(to top right, #ff2d03, #fe700a);
+  top: 10vw;
+  left: 29%;
+  filter: blur(20px);
+  z-index: -1;
+  animation: grady;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes grady {
+  from {
+    filter: blur(20px);
+    transform: translate(10%, -10%) skew(0);
+  }
+  to {
+    filter: blur(30px);
+    transform: translate(-10%, 10%) skew(-12deg);
+  }
+}
 .cart-container {
   width: 800px; /* Adjust width as needed */
   margin: 0 auto;
@@ -1375,7 +1405,20 @@ li {
 .cart-summary p {
   margin: 0.5rem 0;
 }
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
 
+.quantity-button {
+  margin: 10px 10px;
+
+  padding: 5px;
+}
+.remove-button {
+  margin: 0 20px;
+  padding: 5px;
+}
 /* Seller info */
 .seller-info {
   display: flex;

@@ -36,10 +36,8 @@ function SignIn() {
         email: "",
         password: "",
       });
-
       console.log("Sign-in successful");
-      
-      setIsAlertOpen(true); // Open the alert for successful sign-in
+      setIsAlertOpen(true);
       navigate('/');
     } catch (error) {
       console.error("Error signing in", error);
@@ -55,7 +53,7 @@ function SignIn() {
 
   const closeAlert = () => {
     setIsAlertOpen(false);
-    navigate('/'); // Navigate to the '/' route
+    navigate('/');
   };
 
   useEffect(() => {
@@ -70,11 +68,9 @@ function SignIn() {
       const result = await signInWithGoogle();
        // Check if the sign-in was successful
       if (result.success) {
-        // After successful Google Sign-In, redirect to the home page
         navigate('/');
         alert("Sign-in successful. Thank You!");
       } else {
-        // If there's an issue with sign-in, show an alert
         console.error("Error during Google Sign-In:", result.error);
         alert("Error signing in with Google. Please try again.");
       }
