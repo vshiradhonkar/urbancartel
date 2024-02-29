@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 
 const Help = () => {
   const [messages, setMessages] = useState([]);
-  const apiKey = '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'; // Replace with your actual API key
+  const apiKey = 
 
   const openai = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
 
