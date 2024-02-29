@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import OpenAI from 'openai';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const Help = () => {
   const [messages, setMessages] = useState([]);
-  
-  const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+  const apiKey = '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';
 
   const openai = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
 
