@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/urbancartel/static/css/main.11df7fc3.css",
-    "main.js": "/urbancartel/static/js/main.5e27280f.js",
+    "main.css": "/urbancartel/static/css/main.f5cbb252.css",
+    "main.js": "/urbancartel/static/js/main.29e73a1c.js",
     "static/js/787.7ab629d8.chunk.js": "/urbancartel/static/js/787.7ab629d8.chunk.js",
     "static/media/Logo.png": "/urbancartel/static/media/Logo.0046c6aaedbfb7f745eb.png",
     "static/media/NeueHaasDisplayMediu.ttf": "/urbancartel/static/media/NeueHaasDisplayMediu.32921edb532f55cbfdc6.ttf",
     "static/media/NeueHaasDisplayLight.ttf": "/urbancartel/static/media/NeueHaasDisplayLight.46f0c2f76453ff7dcfba.ttf",
     "index.html": "/urbancartel/index.html",
-    "main.11df7fc3.css.map": "/urbancartel/static/css/main.11df7fc3.css.map",
-    "main.5e27280f.js.map": "/urbancartel/static/js/main.5e27280f.js.map",
+    "main.f5cbb252.css.map": "/urbancartel/static/css/main.f5cbb252.css.map",
+    "main.29e73a1c.js.map": "/urbancartel/static/js/main.29e73a1c.js.map",
     "787.7ab629d8.chunk.js.map": "/urbancartel/static/js/787.7ab629d8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.11df7fc3.css",
-    "static/js/main.5e27280f.js"
+    "static/css/main.f5cbb252.css",
+    "static/js/main.29e73a1c.js"
   ]
 }
