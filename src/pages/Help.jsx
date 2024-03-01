@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import OpenAI from 'openai';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -11,9 +11,13 @@ const Help = () => {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [working, setWorking] = useState(false); // State to indicate if the chatbot is working
+
+  // Reference to the chat window
+  const chatWindowRef = useRef(null);
 
   // Initialize OpenAI with API key
-  const apiKey = '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';
+  const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
   const openai = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
 
   useEffect(() => {
@@ -27,6 +31,16 @@ const Help = () => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    // Scroll chat window to the bottom if the user is already at the bottom
+    if (chatWindowRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = chatWindowRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        chatWindowRef.current.scrollTop = scrollHeight;
+      }
+    }
+  }, [messages]);
 
   const loadChatMessages = async (userId) => {
     try {
@@ -50,6 +64,7 @@ const Help = () => {
   const handleUserMessage = async (message) => {
     const newMessage = { id: messages.length + 1, user: true, text: message };
     setMessages([...messages, newMessage]);
+    setWorking(true);
 
     if (user) {
       await saveChatMessages(user.uid, [...messages, newMessage]);
@@ -76,11 +91,13 @@ const Help = () => {
       }
     } catch (error) {
       console.error('Error handling user message:', error);
+    } finally {
+      setWorking(false);
     }
   };
 
   const checkIfAskingAboutShoes = (message) => {
-    const askingAboutShoesKeywords = ['shoes', 'recommendations', 'sneakers', 'boots', 'footwear'];
+    const askingAboutShoesKeywords = ['shoes', 'recommendations', 'sneakers', 'boots', 'footwear', 'trainers', 'kicks', 'runners', 'sandals', 'flats', 'heels'];
     return askingAboutShoesKeywords.some(keyword => message.toLowerCase().includes(keyword));
   };
 
@@ -129,7 +146,7 @@ const Help = () => {
     <div className="help-container">
       <div className='bg-grad-3'></div>
       <div className='bg-grad-4'></div>
-      <div className="chat-window">
+      <div className="chat-window" ref={chatWindowRef}>
         {messages.map((message) => (
           <div key={message.id} className={message.user ? 'user-message' : 'bot-message'}>
             {message.text}
@@ -148,6 +165,7 @@ const Help = () => {
           }}
         />
       </div>
+      {working && <div className="working-indicator">Processing...</div>}
     </div>
   );
 };
