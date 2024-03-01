@@ -14,6 +14,46 @@
   box-sizing: border-box;
   font-family: neue;
 }
+*::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #ffffff;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: black;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: black;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: black;
+}
 
 html,
 body {
@@ -21,6 +61,7 @@ body {
     auto;
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .App {
@@ -41,7 +82,7 @@ body {
   position: fixed;
   font-size: 2.5rem;
   color: white;
-  background-color: #ad21ff;
+  background-color: black;
   border: 3px solid white;
   width: 2rem;
   height: 2rem;
@@ -53,7 +94,6 @@ body {
   text-align: center;
   justify-content: center;
   padding: 2rem;
-  cursor: pointer;
 }
 
 .show-scroll {
@@ -133,7 +173,7 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-  left: 32vw;
+  left: 28vw;
   gap: 1vw;
 }
 .nav_right h4 {
@@ -278,7 +318,7 @@ nav {
 }
 .moving-text {
   white-space: nowrap;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 .moving-text::-webkit-scrollbar {
   display: none;
@@ -423,17 +463,18 @@ nav {
 }
 .fixed-image {
   height: 30vw;
-  width: 24vw;
-  background-color: #fe320a;
+  width: 30vw;
+  object-fit: cover;
   border-radius: 10px;
   position: absolute;
   z-index: 9999999;
   left: 80%;
-  top: 150vw;
+  top: 169vw;
   transform: translate(-50%, -50%);
-  background-size: cover;
+  background-size: contain; /* Adjusted property */
   background-position: center;
   display: none;
+  background-repeat: no-repeat;
 }
 .panel {
   cursor: default;
@@ -1371,14 +1412,47 @@ li {
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-@keyframes grady {
+.bg-grad-3 {
+  height: 33vw;
+  width: 33vw;
+  position: fixed;
+  border-radius: 20%;
+  background: linear-gradient(to top right, #ff2d03, #fe700a);
+  top: 10vw;
+  left: -20%;
+  filter: blur(20px);
+  z-index: -1;
+  animation: grady;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.bg-grad-4 {
+  height: 33vw;
+  width: 33vw;
+  position: fixed;
+  border-radius: 20%;
+  background: linear-gradient(to top right, #ff2d03, #fe700a);
+  top: 0vw;
+  right: -20%;
+  filter: blur(20px);
+  z-index: -1;
+  animation: grady2;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes grady2 {
   from {
     filter: blur(20px);
-    transform: translate(10%, -10%) skew(0);
+    transform: translate(-10%, 20%) skew(0);
   }
   to {
     filter: blur(30px);
-    transform: translate(-10%, 10%) skew(-12deg);
+    transform: translate(10%, -20%) skew(-12deg);
   }
 }
 .cart-container {
@@ -1515,4 +1589,58 @@ li {
 .gift-options a,
 .order-summary a {
   color: inherit; /* Inherit color from parent element */
+}
+/* help component styling */
+.help-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align chat window to bottom */
+  height: 40vw;
+  padding: 20px; /* Add some padding */
+}
+
+.chat-window {
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 70vh; /* Limit the maximum height of the chat window */
+}
+
+.user-message,
+.bot-message {
+  margin: 10px 0; /* Add some margin between messages */
+  padding: 10px; /* Add padding to messages */
+  border-radius: 8px; /* Rounded corners for messages */
+}
+
+.user-message {
+  background-color: #dcf8c6; /* Light green background for user messages */
+}
+
+.input-container {
+  margin-top: 20px; /* Add some margin above the input */
+}
+
+.input-container input[type="text"] {
+  width: calc(100% - 20px); /* Make input full width minus padding */
+  padding: 10px; /* Add padding to input */
+  border-radius: 8px; /* Rounded corners for input */
+  border: 1px solid #ccc; /* Add a border */
+}
+.bot-message {
+  position: relative; /* Add relative positioning */
+  background-color: #ffffff; /* White background for bot messages */
+  animation-name: slideIn; /* Define the animation name */
+  animation-duration: 0.5s; /* Define the animation duration */
+  animation-timing-function: ease-out; /* Define the animation timing function */
+}
+
+/* Define the animation keyframes */
+@keyframes slideIn {
+  from {
+    opacity: 0; /* Start with 0 opacity */
+    transform: translateY(20px); /* Move message downward */
+  }
+  to {
+    opacity: 1; /* End with full opacity */
+    transform: translateY(0); /* Move message back to its original position */
+  }
 }

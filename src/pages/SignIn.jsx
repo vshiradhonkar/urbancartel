@@ -65,20 +65,16 @@ function SignIn() {
   }, [navigate]);
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithGoogle();
-       // Check if the sign-in was successful
-      if (result.success) {
-        navigate('/');
-        alert("Sign-in successful. Thank You!");
-      } else {
-        console.error("Error during Google Sign-In:", result.error);
-        alert("Error signing in with Google. Please try again.");
-      }
-  
+      // Call signInWithGoogle function
+      await signInWithGoogle();
+      
+      // If the function call succeeds, navigate to the home page
+      navigate('/');
+      alert("Sign-in successful. Thank you!");
     } catch (error) {
       // If there's an error during Google Sign-In, show an alert
-      
       console.error("Error during Google Sign-In:", error);
+      alert("Error signing in with Google. Please try again.");
     }
   };
 

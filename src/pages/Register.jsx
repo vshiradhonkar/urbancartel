@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import ScrollTop from "../components/ScrollTop";
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, firestore, signInWithGoogle } from "../firebase";
 import "../App.css";
@@ -172,7 +171,7 @@ function Register() {
           </h3>
         </div>
       </section>
-      <ScrollTop />
+      
       <Footer/>
     </div>
   );

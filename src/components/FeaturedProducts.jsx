@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import "../App.css";
-import productData from './ProductData.jsx';
+import data from "../components/Shop-page/db/data";
 
 function FeaturedProducts() {
   const [isFixedImageVisible, setIsFixedImageVisible] = useState(false);
   const [fixedImageSrc, setFixedImageSrc] = useState('');
+  const [randomProducts, setRandomProducts] = useState([]);
+
+  useEffect(() => {
+    // Shuffle the data array
+    const shuffledData = shuffleArray(data);
+    // Slice the first 7 items
+    const randomProducts = shuffledData.slice(0, 7);
+    setRandomProducts(randomProducts);
+  }, []);
 
   const handleContainerEnter = () => {
     setIsFixedImageVisible(true);
@@ -16,6 +26,15 @@ function FeaturedProducts() {
 
   const handleElemEnter = (image) => {
     setFixedImageSrc(image);
+  }
+
+  // Function to shuffle an array (Fisher-Yates shuffle algorithm)
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
   return (
@@ -32,12 +51,12 @@ function FeaturedProducts() {
           onMouseEnter={handleContainerEnter}
           onMouseLeave={handleContainerLeave}
         >
-          {productData.map((item, index) => (
+          {randomProducts.map((item, index) => (
             <div
               key={index}
               className='elem'
-              data-image={item.image}
-              onMouseEnter={() => handleElemEnter(item.image)}
+              data-image={item.img}
+              onMouseEnter={() => handleElemEnter(item.img)}
             >
               <div className='overlay'></div>
               <h2>{item.title}</h2>
@@ -46,7 +65,7 @@ function FeaturedProducts() {
         </div>
       </div>
       <div className='product-button'>
-      <h4><a href='/shop'>All Products  →</a></h4>
+      <h4><Link to='/shop'>All Products  →</Link></h4>
       </div>
     </>
   );
