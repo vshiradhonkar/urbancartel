@@ -17,8 +17,8 @@ const Help = () => {
   const chatWindowRef = useRef(null);
 
   // Initialize OpenAI with API key
-  const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-  const openai = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
+  const openaiApiKey = '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';
+  const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true });
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -79,15 +79,9 @@ const Help = () => {
         const shoeRecommendations = getShoeRecommendations();
         addBotMessage(shoeRecommendations);
       } else {
-        // If not asking about shoes, respond to simple greetings or continue with default response
-        const isGreeting = checkIfGreeting(message);
-        if (isGreeting) {
-          const response = "Hello! How can I assist you today?";
-          addBotMessage(response);
-        } else {
-          const response = "I'm sorry, the information is not relevant. Can you ask me about Urbancartel?";
-          addBotMessage(response);
-        }
+        // Use OpenAI API to generate response for customer service feedback
+        const customerServiceFeedback = await getCustomerServiceFeedback(message);
+        addBotMessage(customerServiceFeedback);
       }
     } catch (error) {
       console.error('Error handling user message:', error);
@@ -106,9 +100,15 @@ const Help = () => {
     return `Here are some shoe recommendations available on Urbancartel:\n${shoeData}`;
   };
 
-  const checkIfGreeting = (message) => {
-    const greetings = ['hi', 'hello', 'hey', 'howdy', 'hi there'];
-    return greetings.some(greeting => message.toLowerCase().includes(greeting));
+  const getCustomerServiceFeedback = async (message) => {
+    // Use OpenAI API to generate response for customer service feedback
+    const response = await openai.complete({
+      engine: 'text-davinci-002',
+      prompt: message,
+      max_tokens: 150,
+    });
+
+    return response.data.choices[0].text.trim();
   };
 
   const addBotMessage = (message) => {

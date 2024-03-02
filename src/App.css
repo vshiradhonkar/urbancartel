@@ -1633,7 +1633,6 @@ li {
   animation-timing-function: ease-out; /* Define the animation timing function */
 }
 
-/* Define the animation keyframes */
 @keyframes slideIn {
   from {
     opacity: 0; /* Start with 0 opacity */

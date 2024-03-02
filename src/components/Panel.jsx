@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../App.css";
+import GoGreen from './GoGreen';
 
 function Panel() {
   const categories = ['Design', 'Project', 'Execution'];
@@ -48,7 +49,8 @@ function Panel() {
         {selectedCategory && <img src={content[selectedCategory].image} alt='' />}
       </div>
     </div>
-    <p><div className='smalldot'></div> WHO WE WORK WITH</p>
+    <p><div className='smalldot'></div> GO GREEN WITH US</p>
+      <GoGreen/>
     </>
 
   );
