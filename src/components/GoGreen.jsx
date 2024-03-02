@@ -7,7 +7,7 @@ return (
     <>
     <div className='green-card'>
     <div className="parent">
-        <div className="card">
+        <div className="card-green">
             <div className="logo">
                 <span className="circle circle1"></span>
                 <span className="circle circle2"></span>

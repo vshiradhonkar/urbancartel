@@ -4,12 +4,12 @@
   padding: 30px;
 }
 .parent {
-  width: 340px;
-  height: 390px;
+  width: 300px;
+  height: 400px;
   perspective: 1000px;
 }
 
-.card {
+.card-green {
   height: 100%;
   border-radius: 50px;
   background: linear-gradient(
@@ -167,7 +167,7 @@
   padding: 10px;
 }
 .go-green {
-  width: 340px;
+  width: 300px;
   height: 3em;
   border-radius: 30em;
   font-size: 15px;
