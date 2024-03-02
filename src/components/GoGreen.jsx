@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function GoGreen() {
 return (
-    <div className='green-component'>
+    <>
     <div className='green-card'>
     <div className="parent">
         <div className="card">
@@ -27,7 +27,8 @@ return (
     <p className='green-para'>Press the button below to proceed</p>
     <div className='green'>
         <button className='go-green'><Link onClick={() => window.scrollTo(0, 0)} to="/">Go Green  →</Link></button>
-    </div></div>
+    </div>
+    </>
 )
 }
 

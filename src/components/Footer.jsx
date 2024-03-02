@@ -40,7 +40,7 @@ const Footer = () => {
             <li>
               <span>URBAN</span> Cartel
             </li>
-            <li>We offer a wide range of recycled products for all your fashion needs. We have the perfect product to meet your needs.
+            <li>Discover sustainable fashion options in our extensive collection, including sneakers, flats, sandals, and heels, crafted to elevate your style sustainably.
             </li>
             <li>
               <a href="tel:0123456789">
