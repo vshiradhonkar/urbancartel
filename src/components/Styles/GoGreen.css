@@ -1,12 +1,22 @@
+.gogreen {
+  background-color: black;
+  height: 40vw;
+  border-radius: 25px;
+  margin-top: 30px;
+}
 .green-card {
   display: flex;
   justify-content: center;
-  padding: 30px;
+  padding: 70px 0 10px 0;
 }
 .parent {
   width: 300px;
   height: 400px;
   perspective: 1000px;
+}
+.nike-image {
+  position: absolute;
+  right: 0;
 }
 
 .card-green {
@@ -159,7 +169,7 @@
 .green-para {
   display: flex;
   justify-content: center;
-  padding: 1px;
+  padding: 0 0 10px 0;
 }
 .green {
   display: flex;

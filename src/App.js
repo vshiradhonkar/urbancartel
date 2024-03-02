@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Help from "./pages/Help";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
+import GoGreenPage from "./pages/GoGreenPage";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/register" element={<Register />} />
             <Route path="/help" element={<Help />} />
+            <Route path="/gogreen" element={<GoGreenPage />} />
           </Routes>
         </Router>
       </div>

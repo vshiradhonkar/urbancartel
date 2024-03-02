@@ -1,11 +1,14 @@
 import React from 'react';
 import "../components/Styles/GoGreen.css";
 import { Link } from 'react-router-dom';
+import nike from "../images/nike-no-bg.png"
 
 function GoGreen() {
 return (
-    <>
+    <div className='gogreen'>
+    
     <div className='green-card'>
+    <img className='nike-image' src={nike} alt='nike'/>
     <div className="parent">
         <div className="card-green">
             <div className="logo">
@@ -26,9 +29,8 @@ return (
     </div>
     <p className='green-para'>Press the button below to proceed</p>
     <div className='green'>
-        <button className='go-green'><Link onClick={() => window.scrollTo(0, 0)} to="/">Go Green  →</Link></button>
-    </div>
-    </>
+        <button className='go-green'><Link onClick={() => window.scrollTo(0, 0)} to="/gogreen">Go Green  →</Link></button>
+    </div></div>
 )
 }
 
