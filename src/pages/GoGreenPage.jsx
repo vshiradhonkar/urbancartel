@@ -1,8 +1,12 @@
 import React from 'react'
+import HeroGoGreen from '../components/HeroGoGreen'
+
 
 function GoGreenPage() {
   return (
-    <div>GoGreenPage</div>
+    <div>
+    <HeroGoGreen/>
+    </div>
   )
 }
 

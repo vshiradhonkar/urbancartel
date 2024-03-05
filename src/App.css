@@ -216,7 +216,9 @@ nav {
 .hero {
   height: 65vh;
   width: 100%;
-  /* background-color: orange; */
+  /* background-color: orange;
+  border-radius: 20px;
+  padding: 0 20px 0 20px; */
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -233,6 +235,7 @@ nav {
   text-align: right;
   line-height: 8vw;
 }
+
 .HomePage video {
   position: relative;
   border-radius: 30px;

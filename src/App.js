@@ -42,6 +42,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/help" element={<Help />} />
             <Route path="/gogreen" element={<GoGreenPage />} />
+            <Route path="/admin" element={<GoGreenPage />} />
           </Routes>
         </Router>
       </div>
