@@ -21,7 +21,6 @@ function HeroGoGreen() {
         <div><button class="ui-btn"><span>Explore!</span></button></div>
         <span className="bottom-text">An Urbancartel Initiative</span>
       </div>
-      
     </div>
   );
 }

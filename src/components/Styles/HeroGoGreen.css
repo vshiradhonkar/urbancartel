@@ -8,7 +8,7 @@
 .herogogreenimage {
   position: absolute;
   top: -5%;
-  left: 36vw;
+  left: 34vw;
   z-index: 999;
   overflow: hidden;
   height: 25vw;
@@ -64,8 +64,8 @@
 
 .content .logo .logo1 {
   height: 40px;
-  display: flex;
-  justify-content: center;
+  position: relative;
+  left: 10%;
 }
 
 .content .logo .trail {
@@ -95,7 +95,7 @@
 }
 
 .herogogreencard:hover .logo {
-  width: 585px;
+  width: 625px;
   animation: opacity 1s ease-in-out;
 }
 
@@ -327,4 +327,21 @@
     content: "";
     right: 0;
   }
+}
+.GoHero-2 {
+  display: flex;
+  justify-content: center;
+}
+.poorpeople {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 3vw;
+  text-align: right;
+  line-height: 5vw;
+  margin: 10vw 3vw;
+  height: 95vh;
+  width: 88.5%;
+  border-radius: 20px;
+  background-image: url("../../images/clothingfoundation.webp");
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -160,10 +160,11 @@ function Cart() {
         <p>
           <a href="#/">Keep shopping</a>
         </p>
+        <br/>
         <p>
           Enjoy safe and secure shopping with our buyer protection program. Get a
           full refund if your items are lost, damaged, or don't arrive as
-          described. <a href="#/">See details</a>
+          described. <a href="#/"> See details</a>
         </p>
       </div>
       {cartItems.map((item, index) => {
@@ -175,7 +176,7 @@ function Cart() {
             <div className="item-details">
               <div className="title-container">
                 <h4>{product.title}<button className="remove-button" onClick={() => handleRemoveFromCart(index)}>
-                  <FontAwesomeIcon icon={faTrash} /> Remove From Cart
+                <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
                 </button></h4>
                 
               </div>
@@ -216,9 +217,11 @@ function Cart() {
           <span>Total ({totalItems} items):</span> {total.toFixed(2)} USD 
         </p>
       
-        <a href="#/" className="proceed-to-checkout">
-          Proceed to checkout
-        </a>
+        <button  className="proceed-to-checkout">
+        Pay
+        <svg class="svgIcon" viewBox="0 0 576 512"><path 
+        d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
+        </button>
         <p>
           <a href="#/">Apply coupon code</a>
         </p>
