@@ -173,7 +173,7 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-  left: 28vw;
+  right: -20vw;
   gap: 1vw;
 }
 .nav_right h4 {
