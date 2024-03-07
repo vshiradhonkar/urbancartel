@@ -3,7 +3,7 @@ import "../components/Styles/HeroGoGreen.css";
 import Logo from "../Fonts/Logo.svg";
 
 function HeroGoGreen() {
-  return (
+  return (<>
     <div className='herogogreencontainer'>
       <div className="herogogreencard">
         <div className="herogogreenborder"></div>
@@ -21,7 +21,10 @@ function HeroGoGreen() {
         <div><button class="ui-btn"><span>Explore!</span></button></div>
         <span className="bottom-text">An Urbancartel Initiative</span>
       </div>
-    </div>
+          </div>
+    <div className='poorpeople'></div>
+
+    </>
   );
 }
 

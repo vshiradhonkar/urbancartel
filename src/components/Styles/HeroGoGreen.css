@@ -203,6 +203,7 @@
   font: var(--font-weight) var(--font-size) var(--font-family);
   background: var(--btn-default-bg);
   border: none;
+  border-radius: 25px;
   transition: var(--btn-transition);
   overflow: hidden;
   box-shadow: var(--btn-shadow);
@@ -334,14 +335,204 @@
 }
 .poorpeople {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
   font-size: 3vw;
-  text-align: right;
   line-height: 5vw;
-  margin: 10vw 3vw;
-  height: 95vh;
-  width: 88.5%;
-  border-radius: 20px;
-  background-image: url("../../images/clothingfoundation.webp");
+  margin: 3vw 0.5vw;
+  height: 80vh;
+  width: 100%;
+  background-image: url("../../images/clothingfoundation.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.upload-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15vw 0;
+  width: 100%;
+  background-image: url("/src/images/nike-no-bg.png");
+  padding: 10rem 0;
+  background-size: 30vw;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+}
+
+.upload-label {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.upload-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.custom-file-input {
+  font-size: 100px;
+  opacity: 0;
+  display: none;
+}
+
+.custom-file-label {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: #dbdbdb;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.custom-file-text {
+  display: inline-block;
+  color: black;
+}
+
+.upload-button {
+  background-color: rgb(8, 226, 96);
+  color: #fff;
+  font-weight: 700;
+  padding: 15px 20px;
+  border: 1px solid rgb(8, 226, 96);
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+.upload-button:hover {
+  background-color: rgb(0, 255, 214);
+}
+
+.confirmation-modal {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 24 24"><path d="M20.8,9.4,4.87,2.18A2,2,0,0,0,2.18,4.87h0L9.4,20.8A2,2,0,0,0,11.27,22h.25a2.26,2.26,0,0,0,2-1.8l1.13-5.58,5.58-1.13a2.26,2.26,0,0,0,1.8-2A2,2,0,0,0,20.8,9.4Z" style="fill: rgb(0, 0, 0);"></path></svg>'),
+    auto;
+  color: #010103;
+  position: fixed;
+  top: 22vw;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px #fe330aab;
+  z-index: 999;
+  border: 1px dotted white;
+  border-radius: 10px;
+}
+
+/* //accordian styling */
+
+.faq-section {
+  margin-bottom: 10vw;
+}
+
+.faq-content {
+  display: flex;
+  flex-direction: column;
+  color: #010103;
+}
+
+.faq-content_title {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 80rem;
+  line-height: 1.5;
+}
+
+.faq-content_title h5 {
+  font-size: 2.2rem;
+}
+
+.faq-content_title h2 {
+  font-size: 4.2rem;
+  margin-bottom: 1.7rem;
+}
+
+.faq-content_title p {
+  font-size: 1.6rem;
+  color: #706f7b;
+}
+
+.all-questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7rem;
+}
+
+.faq-box {
+  display: flex;
+  flex-direction: column;
+  color: #010103;
+  background-color: white;
+  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.1);
+  width: 80rem;
+}
+
+@media (max-width: 850px) {
+  .faq-box {
+    width: 100%;
+  }
+}
+
+.faq-box_question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+  padding: 1.8rem 4.5rem;
+  transition: 0.15s ease;
+}
+
+.faq-box_question p {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.faq-box_question i {
+  font-size: 2rem;
+}
+
+.faq-box_answer {
+  font-size: 1.6rem;
+  font-family: "Rubik", sans-serif;
+  color: #706f7b;
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.4s ease;
+  padding: 0 4.5rem;
+}
+
+.active-answer {
+  max-height: 20rem;
+  padding: 2.8rem 4.5rem;
+  transition: 0.4s ease;
+}
+
+@media (max-width: 550px) {
+  .active-answer {
+    max-height: 30rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .active-answer {
+    max-height: 55rem;
+  }
+}
+
+.active-question {
+  background-color: #01fdcf;
+  color: white;
+  box-shadow: 0 10px 15px 0 #01fdcf;
 }
