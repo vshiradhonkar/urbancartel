@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/urbancartel/static/css/main.c7e3082b.css",
-    "main.js": "/urbancartel/static/js/main.33e7b317.js",
+    "main.css": "/urbancartel/static/css/main.4560142b.css",
+    "main.js": "/urbancartel/static/js/main.a3364de4.js",
     "static/js/787.7ab629d8.chunk.js": "/urbancartel/static/js/787.7ab629d8.chunk.js",
+    "static/media/clothingfoundation.png": "/urbancartel/static/media/clothingfoundation.b3e1ae129a1805c8b254.png",
     "static/media/Logo.png": "/urbancartel/static/media/Logo.0046c6aaedbfb7f745eb.png",
     "static/media/nike-no-bg.png": "/urbancartel/static/media/nike-no-bg.4108079e3e535acdd9c5.png",
-    "static/media/clothingfoundation.webp": "/urbancartel/static/media/clothingfoundation.e54bb6f3e182ae6cfa30.webp",
     "static/media/NeueHaasDisplayMediu.ttf": "/urbancartel/static/media/NeueHaasDisplayMediu.32921edb532f55cbfdc6.ttf",
     "static/media/NeueHaasDisplayLight.ttf": "/urbancartel/static/media/NeueHaasDisplayLight.46f0c2f76453ff7dcfba.ttf",
     "static/media/Logo.svg": "/urbancartel/static/media/Logo.1145d38112482cad01740533bf5bf8cd.svg",
     "index.html": "/urbancartel/index.html",
-    "main.c7e3082b.css.map": "/urbancartel/static/css/main.c7e3082b.css.map",
-    "main.33e7b317.js.map": "/urbancartel/static/js/main.33e7b317.js.map",
+    "main.4560142b.css.map": "/urbancartel/static/css/main.4560142b.css.map",
+    "main.a3364de4.js.map": "/urbancartel/static/js/main.a3364de4.js.map",
     "787.7ab629d8.chunk.js.map": "/urbancartel/static/js/787.7ab629d8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c7e3082b.css",
-    "static/js/main.33e7b317.js"
+    "static/css/main.4560142b.css",
+    "static/js/main.a3364de4.js"
   ]
 }
