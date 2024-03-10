@@ -158,9 +158,9 @@ return (
         <h1>49. Third-Party Links and Content</h1>
         <p>Urbancartel may include links to third-party websites, products, or services for user convenience. However, Urbancartel does not endorse or guarantee the accuracy, quality, or reliability of third-party content, and users access external sites at their own risk.</p>
 
-        <h1>50. Force Majeure Events</h1>
-        <p>Urbancartel shall not be liable for any delays, disruptions, or failures to perform its obligations arising from force majeure events beyond its control, including but not limited to natural disasters, acts of God, war, terrorism, or government actions.</p>
-
+        <h1>50. Buyer Protection Guarantee</h1>
+        <p>Shop with confidence knowing that our buyer protection program ensures a secure and worry-free shopping experience. With our guarantee, you are entitled to a full refund in the event that your items are lost, damaged, or do not arrive as described.</p>
+        
         <h1>51. Dispute Resolution and Arbitration</h1>
         <p>Any disputes or claims arising from the use of Urbancartel's platform or services shall be resolved through arbitration in accordance with the rules and procedures of the American Arbitration Association. Arbitration awards shall be final and binding on all parties.</p>
 
