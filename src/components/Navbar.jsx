@@ -50,24 +50,24 @@ function Navbar() {
       {userName && <span>Hello, {userName}! </span>}
     </div>
   ):(
-    <><Link to='/'>
+    <><Link onClick={() => window.scrollTo(0, 0)} to='/'>
         <img src={Logo} alt='navimg' />
       </Link></>
   )}
     <div className='nav_main'>
-        <h4><Link to='/'>Home</Link></h4>
-        <h4><Link to='/shop'>Shop</Link></h4>
-        <h4><Link to='/cart'>Cart</Link></h4>
-        <h4><Link to='/help'>Help</Link></h4>
-        <h4><Link to='/terms'>Terms</Link></h4>
-        <h4><Link to='/contact'>Contact</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/'>Home</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/shop'>Shop</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/cart'>Cart</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/help'>Help</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/terms'>Terms</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/contact'>Contact</Link></h4>
       </div>
       <div className='nav_right'>
       {isUserSignedIn ? (
     <>
-      <h4><Link onClick={() => window.scrollTo(0, 0)} to="/">Your Orders</Link></h4>
+      <h4><Link onClick={() => window.scrollTo(0, 0)} to="/orders">Your Orders</Link></h4>
       <h4> 
-        <Link onClick={handleSignOut}>Sign out</Link>
+        <Link  onClick={handleSignOut}>Sign out</Link>
       </h4>
     </>
   ) : (

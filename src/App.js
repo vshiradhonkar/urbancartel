@@ -12,6 +12,7 @@ import Cart from "./pages/Cart";
 import GoGreenPage from "./pages/GoGreenPage";
 import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
+import Orders from "./pages/Orders";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path="/gogreen" element={<GoGreenPage />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/orders" element={<Orders />} />
             <Route path="/contact" element={<GoGreenPage />} />
           </Routes>
         </Router>
