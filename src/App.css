@@ -1694,6 +1694,85 @@ li {
 .order-summary a {
   color: inherit;
 }
+/* Personal information */
+.personal-info {
+  margin: 1vw 0;
+}
+.info-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #c5c5c5;
+  border-radius: 15px;
+}
+
+.info-form label {
+  font-weight: bold;
+}
+
+.info-form input[type="text"],
+.info-form input[type="email"],
+.info-form input[type="tel"],
+.info-form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.info-form .info-form_2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.info-form .info-form_2col span {
+  display: block;
+}
+
+.info-form .info-form_1col span {
+  display: block;
+}
+
+.info-form_checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.info-form_checkbox input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.info-form .error {
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.info-form .error-para {
+  color: #000000;
+  font-weight: 800;
+  margin-top: 5px;
+  font-size: 12px;
+  text-align: justify;
+}
+.info-form p {
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+.info-form a {
+  color: #ff2d03;
+  text-decoration: none;
+  outline: none; /* Add this line */
+}
+
+.info-form a:hover {
+  text-decoration: underline;
+}
+.terms-and-conditions {
+  font-size: 20px;
+  text-decoration: none;
+}
 
 /* help component styling */
 .help-container {
@@ -2189,3 +2268,5 @@ li {
   font-style: italic;
   color: #666;
 }
+
+/* cart styling temporary */

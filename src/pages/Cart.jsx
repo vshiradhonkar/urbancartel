@@ -16,6 +16,46 @@ function Cart() {
   const [subtotal, setSubtotal] = useState(0);
   const [shipping, setShipping] = useState(0);
   const [tax, setTax] = useState(0);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [age, setAge] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+
+  const handleFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const handleLastName = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const handlePhone = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const handleAge = (e) => {
+    setAge(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const handleCity = (e) => {
+    setCity(e.target.value);
+  };
+
+  const handleZip = (e) => {
+    setZip(e.target.value);
+  };
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -154,6 +194,7 @@ function Cart() {
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
+  <>
     <div className="cart-container">
       <div className="cart-summary">
         <h2>{totalItems} item in your cart</h2>
@@ -206,6 +247,137 @@ function Cart() {
         <p>
           <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} USD 
         </p>
+    {/* Personal Details */}
+    <div className='personal-info'>          <h4>Personal Information</h4>
+          <form className="info-form">
+            <div className="info-form_2col">
+              <span>
+                <label>
+                  First Name <b>*</b>
+                </label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={handleFirstName}
+                  placeholder="Enter Your First Name"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+
+              <span>
+                <label>
+                  Last Name <b>*</b>
+                </label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={handleLastName}
+                  placeholder="Enter Your Last Name"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+
+              <span>
+                <label>
+                  Phone Number <b>*</b>
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={handlePhone}
+                  placeholder="Enter Your Phone Number"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+
+              <span>
+                <label>
+                  Age <b>*</b>
+                </label>
+                <input
+                  type="number"
+                  value={age}
+                  onChange={handleAge}
+                  placeholder="18"
+                  min="18"
+                  max="75"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+            </div>
+
+            <div className="info-form_1col">
+              <span>
+                <label>
+                  Email <b>*</b>
+                </label>
+                <input
+                value={email}
+                  type="email"
+                  onChange={handleEmail}
+                  placeholder="Enter your Email Address"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+
+              <span>
+                <label>
+                  Address <b>*</b>
+                </label>
+                <input
+                  value={address}
+                  type="text"
+                  onChange={handleAddress}
+                  placeholder="Enter your Street Address"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+
+              <span>
+                <label>
+                  City <b>*</b>
+                </label>
+                <input
+                value={city}
+                  type="text"
+                  onChange={handleCity}
+                  placeholder="Enter your City"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+
+              <span>
+                <label>
+                  Zip Code <b>*</b>
+                </label>
+                <input
+                  type="text"
+                  onChange={handleZip}
+                  value={zip}
+                  placeholder="Enter your Zip Code"
+                  required
+                />
+                <p className="error">This is Required Field.</p>
+              </span>
+            </div>
+            <span className="info-form_checkbox">
+              <input type="checkbox" required/>
+              <p  className='terms-and-conditions'>I agree to all Terms & Conditions</p>
+            </span>
+            <p className="error-para">After completing the payment process, you'll receive an email with your order details,
+            including product information, delivery address, scheduled delivery time, and payment instructions. 
+            Please ensure payment is made to confirm your order. For any inquiries or assistance, our dedicated customer 
+            support team at UrbanCartel is available via email at urbancartelproject@gmail.com or by phone at (0) 123-456-6789.
+            We're here to ensure a seamless shopping experience. Safe Shopping!</p>
+          </form>
+
         <p>
           <span>Shipping:</span> {shipping.toFixed(2)} USD 
         </p>
@@ -226,6 +398,8 @@ function Cart() {
         <p>We offset carbon emissions from every delivery.</p>
       </div>
     </div>
+  </div>
+  </>
   );
 }
 
