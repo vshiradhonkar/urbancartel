@@ -1,55 +1,70 @@
-import React from 'react';
 import "../App.css";
+import React, { useEffect, useState } from 'react';
+import { firestore } from '../firebase'; // Import firestore from firebase.js
 
-function Orders() {
+function Orders({ user }) {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    // Fetch orders from Firebase Firestore
+    const fetchOrders = async () => {
+      try {
+        if (user) {
+          const snapshot = await firestore
+            .collection('users')
+            .doc(user?.uid)
+            .collection('orders')
+            .orderBy('created', 'desc')
+            .get();
+
+          const ordersData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data()
+          }));
+
+          setOrders(ordersData);
+        } else {
+          setOrders([]); // If user is not logged in, clear orders
+        }
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
+    fetchOrders();
+  }, [user]); // Fetch orders whenever the user changes
+
   return (
-    <div className="order-history">
+    <div className='order-history'>
       <h2>Order History</h2>
       <p>
         Check the status of recent orders, manage returns, and discover similar
         products.
       </p>
-      <div className="order-list">
-        <div className="order-item">
-          <div className="order-details">
-            <p>Order number: WU88191111</p>
-            <p>Date placed: Jul 6, 2021</p>
-            <p>Total amount: $160.00</p>
-          </div>
-          <div className="order-actions">
-            <a href="#/" className="button">View Order</a>
-            <a href="#/" className="button">View Invoice</a>
-          </div>
-        </div>
-        <div className="order-items">
-          <div className="order-item-details">
-            <p>Micro Backpack</p>
-            <p>$70.00</p>
-            <p>
-              Are you a minimalist looking for a compact carry option? The Micro
-              Backpack is the perfect size for your essential everyday carry
-              items. Wear it like a backpack or carry it like a satchel for
-              all-day use.
-            </p>
-            <div className="order-item-actions">
-              <a href="#/shop" className="orders-button">View Product</a>
-              <a href="#/shop" className="orders-button">Buy Again</a>
+      <div className='order-list'>
+        {orders.map(order => (
+          <div key={order.id} className='order-item'>
+            <div className='order-details'>
+              <p>Order number: {order.data.orderNumber}</p>
+              <p>Date placed: {order.data.datePlaced}</p>
+              <p>Total amount: {order.data.totalAmount}</p>
+            </div>
+            <div className='order-items'>
+              {order.data.items.map(item => (
+                <div key={item.id} className='order-item-details'>
+                  <p>{item.name}</p>
+                  <p>${item.price}</p>
+                  <p>{item.description}</p>
+                  {/* Additional item details here */}
+                </div>
+              ))}
+            </div>
+            <div className='order-status'>
+              <p>Delivered on {order.data.deliveryDate}</p>
+              {/* Additional status details here */}
             </div>
           </div>
-          <div className="order-item-details">
-            <p>Nomad Shopping Tote</p>
-            <p>$90.00</p>
-            <p>
-              The durable shopping tote is perfect for the world traveler. Its
-              yellow construction is water, fray, tear resistant. The matching
-              handle, backpack straps, and shoulder loops provide multiple carry
-              options for all your shopping needs.
-            </p>
-          </div>
-        </div>
-        <div className="order-status">
-          <p>Delivered on July 12, 2021</p>
-        </div>
+        ))}
       </div>
     </div>
   );

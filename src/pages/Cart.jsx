@@ -4,6 +4,7 @@ import { faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import { firestore } from '../firebase';
 import data from "../components/Shop-page/db/data";
 import { SunspotLoader } from 'react-awesome-loaders-py3';
 import '../App.css';
@@ -220,11 +221,48 @@ function Cart() {
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 //stripe
 
-  const handleSubmit = async (event) =>{
-     //do all stripes
-    event.preventDefault();
-    setProcessing(true);
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  setProcessing(true);
+  const payload = await stripe.confirmCardPayment(clientSecret, {
+    payment_method: {
+      card: elements.getElement(CardElement)
+    }
+  });
+  
+  if (payload.error) {
+    setError(`Payment failed: ${payload.error.message}`);
+    setProcessing(false);
+  } else {
+    try {
+      // Save order details to Firestore
+      const orderRef = await firestore.collection('orders').add({
+        userId: user.uid,
+        firstName,
+        lastName,
+        phone,
+        age,
+        email,
+        address,
+        city,
+        zip,
+        items: cartItems, 
+        total: total.toFixed(2),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // Clear cart items
+      await firestore.collection('carts').doc(user.uid).set({ products: [] });
+
+      setSucceeded(true);
+      setError(null);
+      setProcessing(false);
+    } catch (error) {
+      setError(`Error placing order: ${error.message}`);
+      setProcessing(false);
+    }
   }
+};
   const handleChange = event =>{
     //listen changes in CardElement
     // & display any errors as customer types their card details
