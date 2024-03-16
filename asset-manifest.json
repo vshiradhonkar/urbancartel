@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/urbancartel/static/css/main.c27042a6.css",
-    "main.js": "/urbancartel/static/js/main.5050788a.js",
+    "main.js": "/urbancartel/static/js/main.9ab9122c.js",
     "static/js/787.7ab629d8.chunk.js": "/urbancartel/static/js/787.7ab629d8.chunk.js",
     "static/media/clothingfoundation.png": "/urbancartel/static/media/clothingfoundation.b3e1ae129a1805c8b254.png",
     "static/media/Logo.png": "/urbancartel/static/media/Logo.0046c6aaedbfb7f745eb.png",
@@ -11,11 +11,11 @@
     "static/media/Logo.svg": "/urbancartel/static/media/Logo.1145d38112482cad01740533bf5bf8cd.svg",
     "index.html": "/urbancartel/index.html",
     "main.c27042a6.css.map": "/urbancartel/static/css/main.c27042a6.css.map",
-    "main.5050788a.js.map": "/urbancartel/static/js/main.5050788a.js.map",
+    "main.9ab9122c.js.map": "/urbancartel/static/js/main.9ab9122c.js.map",
     "787.7ab629d8.chunk.js.map": "/urbancartel/static/js/787.7ab629d8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c27042a6.css",
-    "static/js/main.5050788a.js"
+    "static/js/main.9ab9122c.js"
   ]
 }
