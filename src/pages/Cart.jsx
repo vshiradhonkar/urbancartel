@@ -10,7 +10,8 @@ import { SunspotLoader } from 'react-awesome-loaders-py3';
 import '../App.css';
 import { CardElement , useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
-import axios from 'axios';
+import axios from "../components/axios"
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -35,7 +36,9 @@ function Cart() {
   const [succeeded, setSucceeded] = useState(false); 
   const [processing, setProcessing] = useState(""); 
   const [clientSecret, setClientSecret] = useState(true);
+  const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
+  const navigate = useNavigate();
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -82,6 +85,22 @@ function Cart() {
   
     return () => unsubscribe(); // Unsubscribe from the authentication state listener
   }, []);
+
+  useEffect(() => {
+    // Check if all required fields are filled
+    const fieldsFilled =
+      firstName.trim() !== "" &&
+      lastName.trim() !== "" &&
+      phone.trim() !== "" &&
+      age.trim() !== "" &&
+      email.trim() !== "" &&
+      address.trim() !== "" &&
+      city.trim() !== "" &&
+      zip.trim() !== "";
+  
+    // Update state based on whether all fields are filled
+    setAllFieldsFilled(fieldsFilled);
+  }, [firstName, lastName, phone, age, email, address, city, zip]);
   
   useEffect(() => {
     // Calculate subtotal
@@ -111,6 +130,7 @@ function Cart() {
     
     getClientSecret();
   }, [cartItems]);
+  console.log('the secret is >>>', clientSecret);
 
   const fetchCartItems = async (user) => {
     try {
@@ -214,55 +234,95 @@ function Cart() {
     );
   }
 
+
   // Calculate total amount
   const total = subtotal + shipping + tax;
 
   // Calculate total number of items
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-//stripe
+  if (totalItems === 0) {
+    return (
+      <>
+        <div className='empty-cart-message'>
+        <div className='bg-grad-3'></div>
+          <h4 style={{ textAlign: 'center' }} className='signinplease'>Cart is empty, Start adding items to the cart to proceed.</h4>
+          <div className='bg-grad-4'></div>
+        </div>
+      </>
+    );
+  }
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
-  setProcessing(true);
-  const payload = await stripe.confirmCardPayment(clientSecret, {
-    payment_method: {
-      card: elements.getElement(CardElement)
-    }
-  });
-  
-  if (payload.error) {
-    setError(`Payment failed: ${payload.error.message}`);
-    setProcessing(false);
-  } else {
+  // stripe
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setProcessing(true);
+    
     try {
-      // Save order details to Firestore
-      const orderRef = await firestore.collection('orders').add({
-        userId: user.uid,
-        firstName,
-        lastName,
-        phone,
-        age,
-        email,
-        address,
-        city,
-        zip,
-        items: cartItems, 
-        total: total.toFixed(2),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      // Confirm the payment and get the payload
+      const payload = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement)
+        }
       });
-
-      // Clear cart items
-      await firestore.collection('carts').doc(user.uid).set({ products: [] });
-
-      setSucceeded(true);
-      setError(null);
-      setProcessing(false);
+      
+      if (payload.error) {
+        setError(`Payment failed: ${payload.error.message}`);
+        setProcessing(false);
+        return;
+      }
+      
+      // Payment succeeded
+      const currentUser = firebase.auth().currentUser;
+      
+      if (payload.paymentIntent.status === 'succeeded') {
+        // Save order details to Firestore
+        await firestore.collection('orders').add({
+          userId: currentUser.uid,
+          firstName,
+          lastName,
+          phone,
+          age,
+          email,
+          address,
+          city,
+          zip,
+          items: cartItems,
+          total: total.toFixed(2),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      
+        // Clear cart items
+        await firestore.collection('carts').doc(currentUser.uid).set({ products: [] });
+      
+        // Clear input fields
+        setFirstName("");
+        setLastName("");
+        setPhone("");
+        setAge("");
+        setEmail("");
+        setAddress("");
+        setCity("");
+        setZip("");
+      
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
+      
+        // Redirect to orders page
+        navigate('/orders');
+      
+        // Show alert for successful payment
+        alert("Payment successful!");
+      } else {
+        setError('Payment failed: Payment status is not succeeded.');
+        setProcessing(false);
+      }
     } catch (error) {
       setError(`Error placing order: ${error.message}`);
       setProcessing(false);
     }
-  }
-};
+  };
   const handleChange = event =>{
     //listen changes in CardElement
     // & display any errors as customer types their card details
@@ -271,12 +331,12 @@ const handleSubmit = async (event) => {
 }
   
   return (
-  <>
+  <>  
     <div className="cart-container">
       <div className="cart-summary">
         <h2>{totalItems} item in your cart</h2>
         <p>
-          <a href="#/">Keep shopping</a>
+          <a href="#/shop">Keep shopping</a>
         </p>
         <br/>
         <p>
@@ -297,7 +357,7 @@ const handleSubmit = async (event) => {
                 </button></h4>
                 
               </div>
-              <p>Price: {item.price} USD Each</p>
+              <p>Price: {item.price} INR Each</p>
               <div className="quantity-controls">
                 <button className="quantity-button" onClick={() => handleDecrementQuantity(index)}>
                   <FontAwesomeIcon icon={faMinus} />
@@ -322,7 +382,7 @@ const handleSubmit = async (event) => {
       </div>
       <div className="order-summary">
         <p>
-          <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} USD 
+          <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} INR 
         </p>
     {/* Personal Details */}
     <div className='personal-info'>          <h4>Personal Information</h4>
@@ -456,13 +516,13 @@ const handleSubmit = async (event) => {
           </form>
 
         <p>
-          <span>Shipping:</span> {shipping.toFixed(2)} USD 
+          <span>Shipping:</span> {shipping.toFixed(2)} INR 
         </p>
         <p>
-          <span>Tax:</span> {tax.toFixed(2)} USD 
+          <span>Tax:</span> {tax.toFixed(2)} INR 
         </p>
         <p className="total">
-          <span>Total ({totalItems} items):</span> {total.toFixed(2)} USD 
+          <span>Total ({totalItems} items):</span> {total.toFixed(2)} INR 
         </p>
         <h4>Payment</h4>
       <div className='card-payment'>
@@ -506,14 +566,17 @@ const handleSubmit = async (event) => {
                       value={total}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={" USD"}
+                      suffix={" INR"}
                   />
-                    <button className="proceed-to-checkout" disabled={processing || disabled || succeeded}>
-                        <span>{processing ? <p>Processing</p> : "Pay"}</span>
+                  {!allFieldsFilled && <p className="error">All fields are required.</p>}
+                    <button className="proceed-to-checkout" disabled={processing || disabled || !allFieldsFilled || succeeded}>
+                        <span>{processing ? <p>Processing</p> : "Pay"} </span>
                         <svg class="svgIcon" viewBox="0 0 576 512">
                             <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
                         </svg>
                     </button>
+                    
+                    
                     </div>
 
                     {/* Errors */}

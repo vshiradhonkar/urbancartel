@@ -1,71 +1,106 @@
-import "../App.css";
 import React, { useEffect, useState } from 'react';
-import { firestore } from '../firebase'; // Import firestore from firebase.js
+import { auth, firestore } from '../firebase';
+import { SunspotLoader } from 'react-awesome-loaders-py3';
+import data from "../components/Shop-page/db/data";
+import '../App.css'; // Import the CSS file
 
-function Orders({ user }) {
+function Orders() {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Fetch orders from Firebase Firestore
-    const fetchOrders = async () => {
-      try {
-        if (user) {
-          const snapshot = await firestore
-            .collection('users')
-            .doc(user?.uid)
-            .collection('orders')
-            .orderBy('created', 'desc')
-            .get();
-
-          const ordersData = snapshot.docs.map(doc => ({
-            id: doc.id,
-            data: doc.data()
-          }));
-
-          setOrders(ordersData);
-        } else {
-          setOrders([]); // If user is not logged in, clear orders
-        }
-      } catch (error) {
-        console.error('Error fetching orders:', error);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      if (user) {
+        fetchOrders(user.uid);
+      } else {
+        setLoading(false);
+        setOrders([]);
       }
-    };
+    });
 
-    fetchOrders();
-  }, [user]); // Fetch orders whenever the user changes
+    return () => unsubscribe();
+  }, []);
+
+  const fetchOrders = async (userId) => {
+    try {
+      // Fetch orders from Firestore for the current user
+      const ordersRef = firestore.collection('orders').where('userId', '==', userId);
+      const snapshot = await ordersRef.get();
+
+      // Extract data from the snapshot
+      const ordersData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+      setOrders(ordersData);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
+
+  const findItemDetails = (items) => {
+    return items.map(item => {
+      const foundItem = data.find(dataItem => dataItem.title === item.title);
+      return foundItem ? { ...item, imageUrl: foundItem.img } : null;
+    });
+  };
 
   return (
-    <div className='order-history'>
-      <h2>Order History</h2>
-      <p>
-        Check the status of recent orders, manage returns, and discover similar
-        products.
-      </p>
-      <div className='order-list'>
-        {orders.map(order => (
-          <div key={order.id} className='order-item'>
-            <div className='order-details'>
-              <p>Order number: {order.data.orderNumber}</p>
-              <p>Date placed: {order.data.datePlaced}</p>
-              <p>Total amount: {order.data.totalAmount}</p>
-            </div>
-            <div className='order-items'>
-              {order.data.items.map(item => (
-                <div key={item.id} className='order-item-details'>
-                  <p>{item.name}</p>
-                  <p>${item.price}</p>
-                  <p>{item.description}</p>
-                  {/* Additional item details here */}
+    <div className="orders-container">
+      <h2 className="orders-summary">Order History</h2>
+      {loading ? (
+        <div className="loader-container">
+          <SunspotLoader
+            gradientColors={["#fe330a", "#E0E7FF"]}
+            shadowColor={"#9fa330"}
+            desktopSize={"50px"}
+            mobileSize={"40px"}
+          />
+        </div>
+      ) : (
+        <div>
+          {orders.length === 0 ? (
+            <p className="no-orders-message">No orders found.</p>
+          ) : (
+            <div>
+              {orders.map(order => (
+                <div key={order.id} className="order-card">
+                  <div className="order-details">
+                    <div className="order-info">
+                      <h3 className="order-id">Order ID: {order.id}</h3>
+                      <div className="order-items">
+                        <h4>Items:</h4>
+                        <ul>
+                          {findItemDetails(order.items).map((item, index) => (
+                            <li key={index} className="order-item">
+                              <div className="item-details">
+                                <p>Price: {item.price}</p>
+                                <p>Quantity: {item.quantity}</p>
+                              </div>
+                              <div className="order-images">
+                                <img
+                                  src={item.imageUrl}
+                                  alt={`Item ${index + 1}`}
+                                  className="order-image"
+                                />
+                              </div>
+                              <div className="item-title">{item.title}</div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
-            <div className='order-status'>
-              <p>Delivered on {order.data.deliveryDate}</p>
-              {/* Additional status details here */}
-            </div>
-          </div>
-        ))}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,24 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import OpenAI from 'openai';
+import { SunspotLoader } from 'react-awesome-loaders-py3';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import '../App.css';
-import { SunspotLoader } from 'react-awesome-loaders-py3';
-import data from "../components/Shop-page/db/data";
 
 const Help = () => {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [working, setWorking] = useState(false); // State to indicate if the chatbot is working
+  const [working, setWorking] = useState(false); 
 
-  // Reference to the chat window
   const chatWindowRef = useRef(null);
-
-  // Initialize OpenAI with API key
-  const openaiApiKey = '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';
-  const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true });
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -33,7 +26,6 @@ const Help = () => {
   }, []);
 
   useEffect(() => {
-    // Scroll chat window to the bottom if the user is already at the bottom
     if (chatWindowRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = chatWindowRef.current;
       if (scrollTop + clientHeight === scrollHeight) {
@@ -53,71 +45,8 @@ const Help = () => {
     }
   };
 
-  const saveChatMessages = async (userId, messages) => {
-    try {
-      await firebase.firestore().collection('userchat').doc(userId).set({ messages });
-    } catch (error) {
-      console.error('Error saving chat messages:', error);
-    }
-  };
-
   const handleUserMessage = async (message) => {
-    const newMessage = { id: messages.length + 1, user: true, text: message };
-    setMessages([...messages, newMessage]);
-    setWorking(true);
-
-    if (user) {
-      await saveChatMessages(user.uid, [...messages, newMessage]);
-    }
-
-    try {
-      // Check if the message is explicitly asking about shoes
-      const isAskingAboutShoes = checkIfAskingAboutShoes(message);
-
-      if (isAskingAboutShoes) {
-        // If the user is asking about shoes, provide shoe recommendations
-        const shoeRecommendations = getShoeRecommendations();
-        addBotMessage(shoeRecommendations);
-      } else {
-        // Use OpenAI API to generate response for customer service feedback
-        const customerServiceFeedback = await getCustomerServiceFeedback(message);
-        addBotMessage(customerServiceFeedback);
-      }
-    } catch (error) {
-      console.error('Error handling user message:', error);
-    } finally {
-      setWorking(false);
-    }
-  };
-
-  const checkIfAskingAboutShoes = (message) => {
-    const askingAboutShoesKeywords = ['shoes', 'recommendations', 'sneakers', 'boots', 'footwear', 'trainers', 'kicks', 'runners', 'sandals', 'flats', 'heels'];
-    return askingAboutShoesKeywords.some(keyword => message.toLowerCase().includes(keyword));
-  };
-
-  const getShoeRecommendations = () => {
-    const shoeData = data.map(shoe => `${shoe.title}: $${shoe.newPrice}`).join('\n');
-    return `Here are some shoe recommendations available on Urbancartel:\n${shoeData}`;
-  };
-
-  const getCustomerServiceFeedback = async (message) => {
-    // Use OpenAI API to generate response for customer service feedback
-    const response = await openai.complete({
-      engine: 'text-davinci-002',
-      prompt: message,
-      max_tokens: 150,
-    });
-
-    return response.data.choices[0].text.trim();
-  };
-
-  const addBotMessage = (message) => {
-    const newMessage = { id: messages.length + 1, user: false, text: message };
-    setMessages([...messages, newMessage]);
-
-    if (user) {
-      saveChatMessages(user.uid, [...messages, newMessage]);
-    }
+    // Your message handling logic here
   };
 
   if (loading) {
@@ -141,6 +70,7 @@ const Help = () => {
       </>
     );
   }
+
 
   return (
     <div className="help-container">
