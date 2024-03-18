@@ -35,7 +35,7 @@ function Cart() {
   const [disabled, setDisabled] = useState(true);
   const [succeeded, setSucceeded] = useState(false); 
   const [processing, setProcessing] = useState(""); 
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState('');
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
   const navigate = useNavigate();
