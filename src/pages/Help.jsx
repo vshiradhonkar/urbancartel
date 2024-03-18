@@ -17,7 +17,7 @@ const Help = () => {
   const chatWindowRef = useRef(null);
 
   // Initialize OpenAI with API key
-  const openaiApiKey = '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';
+  const openaiApiKey = '';
   const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true });
 
   useEffect(() => {
