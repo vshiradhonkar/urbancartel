@@ -17,8 +17,7 @@ const Help = () => {
   const chatWindowRef = useRef(null);
 
   // Initialize OpenAI with API key
-  const openaiApiKey = '';
-  const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true });
+
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
