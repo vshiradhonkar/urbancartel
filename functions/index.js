@@ -1,18 +1,14 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(`sk_test_51NxS4wSAFfI6nMC5orPAvbi8DDYEEp3nW75tv
-scU02NDdRKAPr
-VJcm
-WatT
-a9in59MYzxcCUDIdRL9jUASsd5lKdz00ojdbF7nj`);
-const openaiApiKey = "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";
+const stripe = require("stripe")('sk_test_51NxS4wSAFfI6nMC5orPAvbi8DDYEEp3nW75tvscU02NDdRKAPrVJcmWatTa9in59MYzxcCUDIdRL9jUASsd5lKdz00ojdbF7nj');
 
 // Initialize the Express app
 const app = express();
 
 // Enable CORS
 app.use(cors({origin: true}));
+app.use(express.json());
 
 app.get("/", (request, response) =>
   response.status(200).send("hello world"),
@@ -27,7 +23,7 @@ app.post("/cart/create", async (request, response) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: total,
-      currency: "inr",
+      currency: "INR",
     });
 
     console.log("Payment successful! Amount:", total);
@@ -40,10 +36,16 @@ app.post("/cart/create", async (request, response) => {
   }
 });
 
-// Expose OpenAI API key endpoint
-app.get("/help", (request, response) => {
-  response.status(200).send({key: openaiApiKey});
-});
 
 // Export the Express app as a Cloud Function
 exports.api = functions.https.onRequest(app);
+
+
+// imports
+// api
+// app config
+// middlewares
+// api routes
+// listen command
+// example endpoint
+// http://127.0.0.1:5001/urbancartel-2024/us-central1/api
