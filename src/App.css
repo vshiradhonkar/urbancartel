@@ -1662,6 +1662,21 @@ li {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
+.shoe-size-dropdown {
+  margin-bottom: 2rem;
+}
+
+.shoe-size-dropdown label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.shoe-size-dropdown select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
 
 /* Order summary */
 .order-summary {

@@ -17,6 +17,8 @@ function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [shoeSize, setShoeSize] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [user, setUser] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [shipping, setShipping] = useState(0);
@@ -39,6 +41,14 @@ function Cart() {
   const [allFieldsFilled, setAllFieldsFilled] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleShoeSizeChange = (e) => {
+    setShoeSize(e.target.value);
+  };
+
+  const handleCountryChange = (e) => {
+    setSelectedCountry(e.target.value);
+  };
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
@@ -287,6 +297,8 @@ function Cart() {
           address,
           city,
           zip,
+          shoeSize, // Add shoe size
+          gift: document.getElementById('gift-checkbox').checked ? 'yes' : 'no',
           items: cartItems,
           total: total.toFixed(2),
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -371,6 +383,18 @@ function Cart() {
           </div>
         );
       })}
+          <div className="shoe-size-dropdown">
+            <label htmlFor="shoe-size">Select Shoe Size:</label>
+            <select id="shoe-size" value={shoeSize} onChange={handleShoeSizeChange}>
+              <option value="">Select Size(US)</option>
+              <option value="US7">US 7</option>
+              <option value="US8">US 8</option>
+              <option value="US9">US 9</option>
+              <option value="US10">US 10</option>
+              <option value="US11">US 11</option>
+              <option value="US12">US 12</option>
+            </select>
+          </div>
       <div className="gift-options">
         <label htmlFor="gift-checkbox">
           <input type="checkbox" id="gift-checkbox" /> This order is a gift
