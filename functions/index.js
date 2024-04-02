@@ -1,9 +1,10 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(
-"strippe secret key")
-;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY ||
+functions.config().stripe.secret;
+
+const stripe = require("stripe")(stripeSecretKey);
 
 // Initialize the Express app
 const app = express();
