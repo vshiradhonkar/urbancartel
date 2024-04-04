@@ -17,10 +17,7 @@ const Help = () => {
   const chatWindowRef = useRef(null);
 
   // Initialize OpenAI with API key
-  const openai = new OpenAI({
-    apiKey: '',
-    dangerouslyAllowBrowser: true
-  });
+  const openai = new OpenAI(process.env.REACT_APP_OPENAI_API_KEY);
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -103,15 +100,15 @@ const Help = () => {
   };
 
   const getCustomerServiceFeedback = async (message) => {
-    try {
-      // Your custom logic to generate customer service feedback
-      return message + ":)";
-    } catch (error) {
-      console.error('Error generating customer service feedback:', error);
-      return 'Error generating customer service feedback';
-    }
+    // Use OpenAI API to generate response for customer service feedback
+    const response = await openai.complete({
+      engine: 'text-davinci-002',
+      prompt: message,
+      max_tokens: 150,
+    });
+
+    return response.data.choices[0].text.trim();
   };
-  
 
   const addBotMessage = (message) => {
     const newMessage = { id: messages.length + 1, user: false, text: message };
