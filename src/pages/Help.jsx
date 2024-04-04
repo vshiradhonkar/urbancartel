@@ -18,7 +18,7 @@ const Help = () => {
 
   // Initialize OpenAI with API key
   const openai = new OpenAI({
-    apiKey: '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',
+    apiKey: '',
     dangerouslyAllowBrowser: true
   });
 
