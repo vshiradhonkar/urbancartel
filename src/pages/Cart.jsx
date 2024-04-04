@@ -18,7 +18,6 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [shoeSize, setShoeSize] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
   const [user, setUser] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [shipping, setShipping] = useState(0);
@@ -46,9 +45,6 @@ function Cart() {
     setShoeSize(e.target.value);
   };
 
-  const handleCountryChange = (e) => {
-    setSelectedCountry(e.target.value);
-  };
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
