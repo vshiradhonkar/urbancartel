@@ -365,7 +365,7 @@ function Cart() {
                 </button></h4>
                 
               </div>
-              <p>Price: {item.price} INR Each</p>
+              <p>Price: {item.price} USD Each = {item.price * 83.27} INR Each </p>
               <div className="quantity-controls">
                 <button className="quantity-button" onClick={() => handleDecrementQuantity(index)}>
                   <FontAwesomeIcon icon={faMinus} />
@@ -536,13 +536,13 @@ function Cart() {
           </form>
 
         <p>
-          <span>Shipping:</span> {shipping.toFixed(2)} INR 
+          <span>Shipping:</span> {(shipping.toFixed(2))*83.27} INR 
         </p>
         <p>
-          <span>Tax:</span> {tax.toFixed(2)} INR 
+          <span>Tax:</span> {(tax.toFixed(2))*83.27} INR 
         </p>
         <p className="total">
-          <span>Total ({totalItems} items):</span> {total.toFixed(2)} INR 
+          <span>Total ({totalItems} items):</span> {(total.toFixed(2))*83.27} INR 
         </p>
         <h4>Payment</h4>
       <div className='card-payment'>

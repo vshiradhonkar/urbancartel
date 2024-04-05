@@ -10,9 +10,6 @@ const Help = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Reference to the chat window
-  const chatWindowRef = useRef(null);
-
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
@@ -47,6 +44,7 @@ const Help = () => {
     <div className="help-container">
       <div className='bg-grad-3'></div>
       <div className='bg-grad-4'></div>
+      <div className='signinplease'>Use the Chatbot right there {'>>>'}</div>
       <BotpressChat />
     </div>
   );

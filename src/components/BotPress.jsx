@@ -1,5 +1,6 @@
+
 import React, { useEffect } from 'react';
-import '../App.css'; 
+import '../App.css';
 
 const BotpressChat = () => {
   useEffect(() => {
@@ -19,8 +20,7 @@ const BotpressChat = () => {
     };
   }, []);
 
-  return <div id="botpress-webchat" className="chat-window" />; // Add the chat-window class
-
+  return <div id="botpress-webchat" className="urban-cartel-chat-window" />;
 };
 
 export default BotpressChat;
