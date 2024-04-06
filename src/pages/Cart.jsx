@@ -12,6 +12,7 @@ import { CardElement , useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import axios from "../components/axios"
 import { useNavigate } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -299,6 +300,27 @@ function Cart() {
           total: total.toFixed(2),
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
+         // Send confirmation email using EmailJS
+        const emailParams = {
+          to_name: `${firstName} ${lastName}`,
+          to_email: email, 
+          from_name: "UrbanCartel Services",
+          message: "Your Shopping was successful. Thank you!",
+
+          userLastName: lastName,
+          userPhone: phone,
+          userAge: age,
+          userEmail: email,  
+          userAddress: address,
+          userCity: city,
+          userZip: zip,
+        }; // 'service_your_service_id' and 'template_your_template_id' 
+        const emailResponse = await emailjs.send(
+          'service_2p5z0ka',
+          'template_2yjjf7e',
+          emailParams
+        );
+        console.log('Email sent successfully:', emailResponse);
       
         // Clear cart items
         await firestore.collection('carts').doc(currentUser.uid).set({ products: [] });
@@ -402,7 +424,7 @@ function Cart() {
       </div>
       <div className="order-summary">
         <p>
-          <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} INR 
+          <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} USD
         </p>
     {/* Personal Details */}
     <div className='personal-info'>          <h4>Personal Information</h4>
