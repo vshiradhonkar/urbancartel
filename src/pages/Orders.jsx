@@ -53,6 +53,8 @@ function Orders() {
 
   return (
     <div className="orders-container">
+          <div className='bg-grad-3'></div>
+      <div className='bg-grad-4'></div>
       <h2 className="orders-summary">Order History</h2>
       {loading ? (
         <div className="loader-container">

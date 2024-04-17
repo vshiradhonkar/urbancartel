@@ -4,7 +4,7 @@ import 'firebase/compat/firestore';
 import emailjs from 'emailjs-com';
 
 
-emailjs.init("_H59xsezjb2loQduM");
+emailjs.init("zcj9D4VkV4QqYi3n8");
 
 const firebaseConfig = {
   apiKey: "AIzaSyC891_eVdtmE6LPY-yGZxALZpwcJwWsfYo",

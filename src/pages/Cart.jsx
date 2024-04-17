@@ -316,8 +316,8 @@ function Cart() {
           userZip: zip,
         }; // 'service_your_service_id' and 'template_your_template_id' 
         const emailResponse = await emailjs.send(
-          'service_2p5z0ka',
-          'template_2yjjf7e',
+          'service_uxwkybm',
+          'template_96l520k',
           emailParams
         );
         console.log('Email sent successfully:', emailResponse);
@@ -602,13 +602,13 @@ function Cart() {
                     <div className='payment_priceContainer'>
                     <CurrencyFormat
                       renderText={(value)=>(
-                      <h3>Order Total: {value}</h3>
+                      <h3>Order Total: {(total.toFixed(2))*83.27} INR = {value}</h3>
                       )}
                       decimalScale={2}
                       value={total}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={" INR"}
+                      suffix={" USD"}
                   />
                   {!allFieldsFilled && <p className="error">All fields are required.</p>}
                     <button className="proceed-to-checkout" disabled={processing || disabled || !allFieldsFilled || succeeded}>
