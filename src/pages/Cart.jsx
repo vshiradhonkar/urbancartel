@@ -387,7 +387,7 @@ function Cart() {
                 </button></h4>
                 
               </div>
-              <p>Price: {item.price} USD Each = {item.price * 83.27} INR Each </p>
+              <p>Price: {item.price} INR Each </p>
               <div className="quantity-controls">
                 <button className="quantity-button" onClick={() => handleDecrementQuantity(index)}>
                   <FontAwesomeIcon icon={faMinus} />
@@ -424,7 +424,7 @@ function Cart() {
       </div>
       <div className="order-summary">
         <p>
-          <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} USD
+          <span>Item(s) subtotal:</span> {subtotal.toFixed(2)} INR
         </p>
     {/* Personal Details */}
     <div className='personal-info'>          <h4>Personal Information</h4>
@@ -558,13 +558,13 @@ function Cart() {
           </form>
 
         <p>
-          <span>Shipping:</span> {(shipping.toFixed(2))*83.27} INR 
+          <span>Shipping:</span> {(shipping.toFixed(2))} INR 
         </p>
         <p>
-          <span>Tax:</span> {(tax.toFixed(2))*83.27} INR 
+          <span>Tax:</span> {(tax.toFixed(2))} INR 
         </p>
         <p className="total">
-          <span>Total ({totalItems} items):</span> {(total.toFixed(2))*83.27} INR 
+          <span>Total ({totalItems} items):</span> {(total.toFixed(2))} INR 
         </p>
         <h4>Payment</h4>
       <div className='card-payment'>
@@ -602,13 +602,13 @@ function Cart() {
                     <div className='payment_priceContainer'>
                     <CurrencyFormat
                       renderText={(value)=>(
-                      <h3>Order Total: {(total.toFixed(2))*83.27} INR = {value}</h3>
+                      <h3>Order Total: {value}</h3>
                       )}
                       decimalScale={2}
                       value={total}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={" USD"}
+                      suffix={" INR"}
                   />
                   {!allFieldsFilled && <p className="error">All fields are required.</p>}
                     <button className="proceed-to-checkout" disabled={processing || disabled || !allFieldsFilled || succeeded}>

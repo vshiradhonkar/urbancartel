@@ -1,0 +1,257 @@
+
+.nav_right h4 {
+  padding: 10px 20px;
+  border: 1px solid #00000083;
+  border-radius: 50px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.699);
+  font-size: 18px;
+  position: relative;
+  transition: all ease 0.4s;
+  overflow: hidden;
+}
+
+.nav_right h4::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  left: 0;
+  bottom: -100%;
+  border-radius: 50%;
+  transition: all ease 0.3s;
+}
+.nav_right h4:hover::after {
+  bottom: 0;
+  border-radius: 0;
+}
+.nav_right h4:hover a {
+  color: white;
+}
+.nav_right h4 a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.699);
+  z-index: 9;
+  position: relative;
+}
+
+// js
+\
+
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaBars, FaTimes } from "react-icons/fa";
+import "../App.css";
+import Logo from "../Fonts/Logo.png";
+import { auth } from "../firebase";
+
+function Navbar() {
+  const [nav, setNav] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [userName, setUserName] = useState('');
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsUserSignedIn(!!user);
+
+      if (user) {
+        setUserName(user.displayName || 'User');
+      } else {
+        setUserName('');
+      }
+    });
+    // Cleanup the subscription on component unmount
+    return () => unsubscribe();
+  }, []); // Empty dependency array ensures useEffect runs only once
+
+  const handleSignOut = () => {
+    document.body.classList.add('modal-open');
+    setShowConfirmation(true);
+  };
+  const handleMobileSignOut = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmSignOut = async () => {
+    try {
+      await auth.signOut();
+      alert("Signed out successfully. Thank You!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out", error);
+    } finally {
+      document.body.classList.remove('modal-open');
+      setShowConfirmation(false);
+    }
+  };
+  const navbarClass = scrollPosition > 0 ? "navbar navbar-blur" : "navbar";
+  const openNav = () => {
+    setNav(!nav);
+  };
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 0;
+      setIsScrolled(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <nav className={isScrolled ? "navbar scrolled" : "nav"}>
+{/* For Mobiles */}
+<div className={`mobile-navbar ${nav ? "open-nav" : ""}`}>
+          <div onClick={openNav} className="mobile-navbar_close">
+            <FaTimes />
+          </div>
+          <ul className="mobile-navbar_links">
+            <li>
+              <Link  onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/shop">
+              Shop
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/cart">
+                Cart
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/help">
+                help
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/terms">
+                Terms & Conditions
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/contact">
+                Contact
+              </Link>
+            </li>
+            {
+              isUserSignedIn ? (
+                <>
+                <li>
+                <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/orders">
+                  Your Orders
+                </Link></li>
+                <li>
+                <Link onClick={handleMobileSignOut} >
+                  Sign out
+                </Link>
+                {showConfirmation && (
+                  <div className="confirmation-modal">
+                    <p>Are you sure you want to sign out?</p>
+                    <button onClick={handleConfirmSignOut}>Yes</button>
+                    <button onClick={() => setShowConfirmation(false)}>No</button>
+                  </div>
+                )}
+
+              </li>
+              </>
+            ) : (
+              <>
+              <li>
+              <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/signin">
+              Sign in
+            </Link>
+            </li>
+            <li>
+            <Link onClick={() => { openNav(); window.scrollTo(0, 0); }} to="/register">
+              Register
+            </Link>
+            </li>
+            </>
+            )
+            }
+          </ul>
+        </div>
+    {/* desktop navbar */}
+    <div className={navbarClass}> 
+    {isUserSignedIn ? (
+    <div className='username'>
+      {userName && <span>Hello, {userName}! </span>}
+    </div>
+  ):(
+    <><Link onClick={() => window.scrollTo(0, 0)} to='/'>
+        <img src={Logo} alt='navimg' />
+      </Link></>
+  )}
+    <div className='nav_main'>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/'>Home</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/shop'>Shop</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/cart'>Cart</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/help'>Help</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/terms'>Terms</Link></h4>
+        <h4><Link onClick={() => window.scrollTo(0, 0)} to='/contact'>Contact</Link></h4>
+      </div>
+      <div className='nav_right'>
+      {isUserSignedIn ? (
+    <>
+      <h4><Link onClick={() => window.scrollTo(0, 0)} to="/orders">Your Orders</Link></h4>
+      <h4> 
+        <Link  onClick={handleSignOut}>Sign out</Link>
+      </h4>
+    </>
+  ) : (
+    <>
+      <h4>
+        <Link onClick={() => window.scrollTo(0, 0)} className="navbar_buttons_sign-in" to="/signin">
+          Sign in
+        </Link>
+      </h4>
+      <h4>
+        <Link onClick={() => window.scrollTo(0, 0)} className="navbar_buttons_register" to="/register">
+          Register
+        </Link>
+      </h4>
+    </>
+  )} 
+      </div>
+      {showConfirmation && (
+                  <div className="confirmation-modal">
+                    <p>Are you sure you want to sign out?</p>
+                    <button onClick={handleConfirmSignOut}>Yes</button>
+                    <button onClick={() => setShowConfirmation(false)}>No</button>
+                  </div>
+                )}
+
+          <div className="mobile-hamb" onClick={openNav}>
+            <FaBars />
+          </div>           
+    </div>
+    </nav>
+    </>
+  );
+}
+
+export default Navbar;
